@@ -36,4 +36,32 @@ public class PosMachine {
     public int calculateTotalPrice(List<ReceiptItem> receiptItems) {
         return receiptItems.stream().mapToInt(ReceiptItem::getSubTotal).sum();
     }
+    public Receipt calculateCost(List<ReceiptItem> receiptItems) {
+        List<ReceiptItem> receiptItemsWithSubtotal = calculatePerItem(receiptItems);
+        Receipt receipt = new Receipt();
+        receipt.setReceiptItems(receiptItemsWithSubtotal);
+        receipt.setTotalPrice(calculateTotalPrice(receiptItemsWithSubtotal));
+        return receipt;
+    }
+    public String generateItemsReceipt(Receipt receipt) {
+        StringBuilder itemsReceipt = new StringBuilder();
+        receipt.getReceiptItems().forEach(receiptItem -> itemsReceipt.append("Name: ").append(receiptItem.getName())
+                .append(", Quantity: ").append(receiptItem.getQuantity())
+                .append(", Unit price: ").append(receiptItem.getUnitPrice()).append(" (yuan)")
+                .append(", Subtotal: ").append(receiptItem.getSubTotal()).append(" (yuan)").append("\n"));
+        return itemsReceipt.toString();
+    }
+    public String generateReceipt(String itemsReceipt, int totalPrice) {
+        return "***<store earning no money>Receipt***" + "\n" +
+                itemsReceipt +
+                "----------------------" + "\n" +
+                "Total: " + totalPrice + " (yuan)" + "\n" +
+                "**********************";
+    }
+    public String renderReceipt(Receipt receipt) {
+        String itemsReceipt = generateItemsReceipt(receipt);
+        return generateReceipt(itemsReceipt, receipt.getTotalPrice());
+    }
+
+
 }
