@@ -16,7 +16,7 @@ public class PosMachine {
         List<ReceiptItem> receiptItems =new ArrayList<>();
         List<String> specificBarcodes = barcodes.stream().distinct().collect(Collectors.toList());
         //count of barcodes
-        HashMap<String, Integer> countOfItems = new HashMap<String, Integer>();
+        HashMap<String, Integer> countOfItems = new HashMap<>();
         specificBarcodes.forEach(barcode -> countOfItems.put(barcode, Collections.frequency(barcodes,barcode)));
 
         items.forEach(item -> {

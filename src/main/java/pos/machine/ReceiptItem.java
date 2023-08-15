@@ -1,6 +1,5 @@
 package pos.machine;
 
-import java.util.HashMap;
 
 public class ReceiptItem {
 
