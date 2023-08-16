@@ -18,8 +18,8 @@ public class ReceiptItem {
     public void setUnitPrice(int unitPrice) {
         this.unitPrice = unitPrice;
     }
-    public void setSubTotal(int subTotal) {
-        this.subTotal = subTotal;
+    public void setSubTotal(int quantity, int unitPrice) {
+        this.subTotal = quantity * unitPrice;
     }
 
 

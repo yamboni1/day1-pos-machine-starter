@@ -28,16 +28,22 @@ public class PosMachine {
         });
         return receiptItems;
     }
-    public List<ReceiptItem> calculatePerItem(List<ReceiptItem> receiptItems) {
-        receiptItems.forEach(receiptItem -> receiptItem.setSubTotal(receiptItem.getQuantity() * receiptItem.getUnitPrice()));
+    public List<ReceiptItem> calculateItemsCost(List<ReceiptItem> receiptItems) {
+
+
+        receiptItems.forEach(receiptItem -> {
+            receiptItem.setSubTotal(receiptItem.getQuantity(), receiptItem.getUnitPrice());
+        });
+
         return receiptItems;
     }
 
     public int calculateTotalPrice(List<ReceiptItem> receiptItems) {
+
         return receiptItems.stream().mapToInt(ReceiptItem::getSubTotal).sum();
     }
     public Receipt calculateCost(List<ReceiptItem> receiptItems) {
-        List<ReceiptItem> receiptItemsWithSubtotal = calculatePerItem(receiptItems);
+        List<ReceiptItem> receiptItemsWithSubtotal = calculateItemsCost(receiptItems);
         Receipt receipt = new Receipt();
         receipt.setReceiptItems(receiptItemsWithSubtotal);
         receipt.setTotalPrice(calculateTotalPrice(receiptItemsWithSubtotal));
