@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class PosMachine {
+    //TODO: Can reformat code to make it look cleaner. (Ctrl + Alt + L), removes unnecessary spaces and line breaks.
     public String printReceipt(List<String> barcodes) {
 
         List<ReceiptItem> receiptItems =decodeToItems(barcodes);
@@ -30,7 +31,7 @@ public class PosMachine {
     }
     public List<ReceiptItem> calculateItemsCost(List<ReceiptItem> receiptItems) {
 
-
+        //TODO: Below code can be simplified to an expression lambda (one-liner)
         receiptItems.forEach(receiptItem -> {
             receiptItem.setSubTotal(receiptItem.getQuantity(), receiptItem.getUnitPrice());
         });
